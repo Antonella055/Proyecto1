@@ -46,7 +46,7 @@ public class Borrararchivojava{
       //unless content matches data to be removed.
       while ((line = br.readLine()) != null) {
 
-        if (!line.trim().equals(lineToRemove)) {
+        if (!line.contains(lineToRemove)) {
 
           pw.println(line);
           pw.flush();
@@ -76,7 +76,7 @@ public class Borrararchivojava{
      
     public static void main(String[] args)
     {
-        modifyFile("/home/luciano/Desktop/Universidad/4to trimestre/Java/muestra.txt", "@africa");
+        modifyFile("/home/luciano/Desktop/Universidad/4to trimestre/Java/muestra.txt", "@cipriano");
          //Oldstring es la string que será reemplazada, new string será el reemplazo.
         System.out.println("done");
     }

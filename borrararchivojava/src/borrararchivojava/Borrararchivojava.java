@@ -21,6 +21,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 public class Borrararchivojava{   
     static void modifyFile(String file, String lineToRemove)
       {
@@ -46,7 +49,7 @@ public class Borrararchivojava{
       //unless content matches data to be removed.
       while ((line = br.readLine()) != null) {
 
-        if (!line.contains(lineToRemove)) {
+        if (!line.trim().contains(lineToRemove)) {
 
           pw.println(line);
           pw.flush();
@@ -76,8 +79,29 @@ public class Borrararchivojava{
      
     public static void main(String[] args)
     {
-        modifyFile("/home/luciano/Desktop/Universidad/4to trimestre/Java/muestra.txt", "@cipriano");
-         //Oldstring es la string que será reemplazada, new string será el reemplazo.
+        JFileChooser chooser = new JFileChooser();
+chooser.setCurrentDirectory(new java.io.File("."));
+chooser.setDialogTitle("Seleccione un archivo txt");
+chooser.addChoosableFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
+chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+chooser.setAcceptAllFileFilterUsed(false);
+
+if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+  
+  System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+} else {
+  System.out.println("No hay selección ");
+}
+
+String eliminar = (String)JOptionPane.showInputDialog(
+                    "Ingrese el usuario a eliminar");
+                    
+
+   String arc =  chooser.getSelectedFile().toString();
+
+      modifyFile(arc, eliminar);
+        
+//Oldstring es la string que será reemplazada, new string será el reemplazo.
         System.out.println("done");
     }
 }

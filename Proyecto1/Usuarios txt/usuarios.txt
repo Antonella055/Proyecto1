@@ -1,0 +1,31 @@
+usuarios
+@jaz
+@ale
+@juan
+@rive
+@male
+@mia
+@seba
+@juli8
+@julio
+@carl
+relaciones
+@jaz, @rive
+@ale, @juan
+@ale, @julio
+@ale, @carl
+@juan, @jaz
+@rive, @jaz
+@rive, @ale
+@male, @rive
+@male, @julio
+@mia, @jaz
+@seba, @juli8
+@juli8, @mia
+@juli8,@seba
+@julio,@male
+@julio,@carl
+@carl, @ale
+@carl,@julio
+
+  

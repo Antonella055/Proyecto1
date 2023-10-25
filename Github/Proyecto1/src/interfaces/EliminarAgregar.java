@@ -4,7 +4,12 @@
  */
 package interfaces;
 
-import proyecto1.Usuarios;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import proyecto1.GestionUsers;
+import static proyecto1.GestionUsers.InputAñadirUser;
+import static proyecto1.GestionUsers.InputEliminacionUser;
 
 /**
  *
@@ -107,11 +112,21 @@ public class EliminarAgregar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsuarioActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            InputAñadirUser();
+        } catch (IOException ex) {
+            Logger.getLogger(EliminarAgregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_AgregarUsuarioActionPerformed
 
     private void EliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarUsuarioActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            InputEliminacionUser();
+        } catch (IOException ex) {
+            Logger.getLogger(EliminarAgregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         
@@ -158,7 +173,7 @@ public class EliminarAgregar extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Usuarios().setVisible(true);
+                new GestionUsers().setVisible(true);
             }
         });
     }

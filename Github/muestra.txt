@@ -1,5 +1,4 @@
 usuarios
-pepe
 Luciano
 juanc
 xoxojaime
@@ -13,11 +12,9 @@ radiogaga
 cipriano
 newageforever
 relaciones
-pepe, Luciano
 Luciano, juanc
 Luciano, tuqui33
 tuqui33, xoxojaime
-xoxojaime, pepe
 juanc, sancho23
 sancho23, Luciano
 sancho23, terciopelo

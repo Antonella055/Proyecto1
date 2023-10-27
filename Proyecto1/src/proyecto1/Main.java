@@ -6,13 +6,15 @@ package proyecto1;
 
 import Grafo.ComponentesFConectados;
 import Grafo.GeneradorGrafo;
+import Grafo.Grafo;
+import Grafo.GrafoJgraphT;
 import Grafo.Vertice;
-
+import interfaces.VerGrafo;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 
 //Main
@@ -23,27 +25,29 @@ import java.util.Map;
 
 public class Main {
     public static void main (String[] args) throws FileNotFoundException, Exception{
-        GestordeArchivo gestor= new GestordeArchivo();
-       
-        GeneradorGrafo grafo= new GeneradorGrafo(gestor);
-        
+           GestordeArchivo gestor = new GestordeArchivo();
+            VerGrafo ventana = new VerGrafo();
+
+            // Crear una instancia de GeneradorGrafo con los parámetros gestor y ventana
+            GeneradorGrafo generador = new GeneradorGrafo(gestor);
+            GrafoJgraphT cons= new GrafoJgraphT(gestor);
 
         
         ComponentesFConectados comp= new ComponentesFConectados();
-      
-        
         gestor.ArchivoSeleccionado();
         Map <String, List<String>> relaciones= gestor.obtenerRelaciones();
+
         List<String> usuarios=gestor.obtenerUsuarios(relaciones);
         
+        HashMap<Integer, String> usuarioMap = cons.crearMapaUser(usuarios);
+        
+         Grafo grafo = new Grafo(new ArrayList<>(), new ArrayList<>());
       
-        int[][] matrizAdyacencia = gestor.crearmatrizAdyacencia(usuarios, relaciones);
+        int[][] matrizAdyacencia = gestor.crearmatrizAdyacencia(usuarios,relaciones);
      
         gestor.mostrarmatrizAdyacencia(matrizAdyacencia, usuarios);
-        grafo.generarGrafo(matrizAdyacencia);
-        
+        cons.generarGrafo(matrizAdyacencia, usuarioMap, grafo);
         }
-
     }
     
     

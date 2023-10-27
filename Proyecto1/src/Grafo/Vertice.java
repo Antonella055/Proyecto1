@@ -14,32 +14,54 @@ import proyecto1.GestordeArchivo;
  * @author Antonella
  */
 public class Vertice {
-    int Id;
-
-    List<Vertice> arcos;
+    private int Id;
+    private String nombre;
+    private boolean visitado;
+    private List<Vertice> adyacentes;
+    private int compId;
     
+
     
     public Vertice(int Id){
         this.Id= Id;
-        this.arcos= new ArrayList<>();
-      
+        this.nombre= nombre;
+        this.adyacentes= new ArrayList<>();
     }
     
-    public void addAdyacente(Vertice vertice){
-        arcos.add(vertice);
-    }
-    
+   
     public List<Vertice> getAdyacente(){
-        return arcos;
+        return adyacentes;
     }
     public int getId(){
-        return Id;
+        return this.Id;
     }
     
-    public void setId(int Id){
-        this.Id=Id;
+    public void setcompId(int compId){
+        this.compId=compId;
     }
     
+    public int getcompId(){
+        return compId;
+    }
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    public boolean Vistado(){
+        return visitado;
+    } 
+    public void setVisita(boolean visitado){
+        this.visitado=visitado;
+    }
+    
+    public void addVecino(Vertice vertice){
+        this.adyacentes.add(vertice);
+    }
+    
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
     
          }
   

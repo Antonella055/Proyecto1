@@ -9,14 +9,29 @@ package Grafo;
  * @author Antonella
  */
 public class Arco {
-    Vertice origen;
-    Vertice destino;
-    int peso;
+    private Vertice origen;
+    private Vertice destino;
+
     
-    public Arco(Vertice origen,Vertice destino, int peso){
+    public Arco(Vertice origen, Vertice destino){
         this.origen=origen;
         this.destino=destino;
-        this.peso=peso;
+   
     }
     
+
+    public Vertice getOrigen(){
+        return origen;
+    }
+    
+    public Vertice getDestino(){
+        return destino;
+    }
+    public void setOrigen(Vertice vOrigen){
+        this.origen=vOrigen;
+    }
+   public void setDestino(Vertice vdestino){
+       this.destino=vdestino;
+   }
 }
+

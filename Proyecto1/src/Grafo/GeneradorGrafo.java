@@ -5,35 +5,23 @@ package Grafo;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
-
-import org.jgrapht.graph.SimpleGraph;
-import org.jgrapht.graph.DefaultEdge;
-
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.layout.mxGraphLayout;
-import com.mxgraph.model.mxGraphModel;
+
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.layout.mxCompactTreeLayout;
-import com.mxgraph.util.mxConstants;
-import com.mxgraph.util.mxUtils;
+
+
 import com.mxgraph.view.mxGraph;
-import interfaces.VerGrafo;
-import java.awt.Color;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.swing.JFrame;
-import org.jgrapht.Graph;
 
-import org.jgrapht.alg.connectivity.KosarajuStrongConnectivityInspector;
-import org.jgrapht.graph.DefaultDirectedGraph;
-
-
-
+import javax.swing.JPanel;
 import proyecto1.GestordeArchivo;
+import interfaces.VerGrafo;
+import javax.swing.JFrame;
 
 
 /**
@@ -46,6 +34,7 @@ public class GeneradorGrafo  {
     private List<Vertice> vertices;
     String VString;
     private final mxGraph grafo;
+    public JPanel panelGrafo;
     private final HashMap <Integer, Object> vertexMap;
     private final HashMap<Integer, String>usuario;
     private final HashMap<Integer, List<String>>usuarioMap;
@@ -60,7 +49,6 @@ public class GeneradorGrafo  {
     public GeneradorGrafo(GestordeArchivo gestor){ 
         this.matrizAdyacencia= gestor.getMatriz();
         this.usuarios= gestor.getusuarios();
-        
         grafo= new mxGraph();
         usuarioMap= new HashMap<>();
         vertices= new ArrayList<>();
@@ -88,7 +76,7 @@ public class GeneradorGrafo  {
         
         
         for (int i=0; i< matrizAdyacencia.length; i++){ //iteracion para agregar los vertices 
-            Vertice vertice = new Vertice(i);
+            Vertice vertice = new Vertice(i),;
             vertices.add(vertice);
             usuarioMap.put(i, getUsuario());
         }
@@ -120,8 +108,6 @@ public class GeneradorGrafo  {
     
     
       public void GrafoVisual(HashMap<Integer,List<String>> usuarioMap){
-          
-          
           Object parentG=grafo.getDefaultParent();
           grafo.getModel().beginUpdate();
           
@@ -150,19 +136,28 @@ public class GeneradorGrafo  {
               grafo.getModel().endUpdate();
           }
           
-          visualizarGrafo(grafo);
+          
+          visualizarGrafo(panelGrafo,grafo);
       }
     
         
-    public void visualizarGrafo(mxGraph grafo) {
-   
-        VerGrafo verGrafo = new VerGrafo(); // Crea una instancia de la clase que contiene el panel
-        verGrafo.agregarGrafo(grafo); 
-        verGrafo.setVisible(true);
+    public void visualizarGrafo(JPanel panel, mxGraph grafo) {
         
+           JFrame frame = new JFrame();
+        frame.setTitle("Grafo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   
+        mxGraphComponent graphComponent = new mxGraphComponent(grafo);
+        mxGraphLayout layout = new mxHierarchicalLayout(grafo);
+        layout.execute(grafo.getDefaultParent());
+         frame.getContentPane().add(graphComponent);
+        frame.pack();
+        frame.setVisible(true);
+        
+   
+   
     }
     
-      
         }
     
 

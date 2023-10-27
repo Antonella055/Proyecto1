@@ -76,7 +76,7 @@ public class GeneradorGrafo  {
         
         
         for (int i=0; i< matrizAdyacencia.length; i++){ //iteracion para agregar los vertices 
-            Vertice vertice = new Vertice(i),;
+            Vertice vertice = new Vertice(i);
             vertices.add(vertice);
             usuarioMap.put(i, getUsuario());
         }
@@ -85,25 +85,24 @@ public class GeneradorGrafo  {
                 if (matrizAdyacencia[i][j]==1){ //agrega las relaciones de los vertices mediante artistas, evaluando si en la matriz el valor es 1.
                    Vertice origen= vertices.get(i);
                    Vertice destino= vertices.get(j);
-                   origen.addAdyacente(destino);
-                   destino.addAdyacente(origen);
+                   origen.addVecino(destino);
+                   destino.addVecino(origen);
                    
                     }
                 }}
+    System.out.println(vertices);
     ImprimirG();
     GrafoVisual(usuarioMap);
     }
     //Output de los pares (eliminar)
     public void ImprimirG (){
     for (Vertice vertice: vertices){
-        System.out.print("vertice:"+ vertice.Id+":");
-        for (Vertice adyacente: vertice.arcos){
-            System.out.print("("+vertice.Id+","+adyacente.Id+")");
+        System.out.print("vertice:"+ vertice.getId()+":");
+        for (Vertice adyacente: vertice.getAdyacente()){
+            System.out.print("("+vertice.getId()+","+adyacente.getId()+")");
         }
         System.out.println();
     }
-   
-     
     }
     
     

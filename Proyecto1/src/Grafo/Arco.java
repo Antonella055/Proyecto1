@@ -16,10 +16,7 @@ public class Arco {
     public Arco(Vertice origen, Vertice destino){
         this.origen=origen;
         this.destino=destino;
-   
     }
-    
-
     public Vertice getOrigen(){
         return origen;
     }

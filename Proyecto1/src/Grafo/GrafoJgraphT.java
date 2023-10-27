@@ -29,8 +29,7 @@ public class GrafoJgraphT {
     private HashMap <Integer, String> usuarioMap;
     private final int [][] matrizAdyacencia; 
     public final DefaultDirectedGraph<Integer, DefaultEdge> graf2;
-    private List<Vertice> vertices;
-    private List<Arco> adyacentes;
+  
     
     
     
@@ -43,9 +42,7 @@ public class GrafoJgraphT {
         usuarioMap=new HashMap();
         graf2= new DefaultDirectedGraph<>(DefaultEdge.class);
         
-        
-        this.vertices = new ArrayList<>();
-        this.adyacentes = new ArrayList<>();
+     
     }
     
     public HashMap<Integer, String> crearMapaUser(List<String>usuarios) { //Crear un mapa de usuarios para vincular su posicion de matriz con su nombre de usuario
@@ -57,46 +54,55 @@ public class GrafoJgraphT {
     }
     
     public void generarGrafo (int[][] matrizAdyacencia, HashMap<Integer, String> relaciones, Grafo grafo){
-        int numVertices= matrizAdyacencia.length; //numero de vertices del grafo partiendo de los datos de la matriz
-        this.usuarioMap = relaciones;
-        
-     
-        List<Vertice> verticeList=new ArrayList<>();
-        List<Arco> adyacentes=new ArrayList<>();
-       
+//        int numVertices= matrizAdyacencia.length; //numero de vertices del grafo partiendo de los datos de la matriz
+//        this.usuarioMap = relaciones;
+//        
+//     
+//        List<Vertice> vertices=new ArrayList<>();
+//        List<Arco> adyacentes=new ArrayList<>();
+//       
+//
+//        for (int i=0; i< numVertices; i++){ //iteracion para agregar los vertices 
+//            Vertice vertice= new Vertice(i);
+//            vertices.add(vertice);
+//            
+//    }
+//            
+//        for (int i =0 ; i < numVertices; i++){  //itera cada par de vertice
+//            for (int j=0;j< numVertices;j++){
+//                if (matrizAdyacencia[i][j]==1){ //agrega las relaciones de los vertices mediante artistas, evaluando si en la matriz el valor es 1.
+//                    Vertice origen=vertices.get(i);
+//                     Vertice destino =vertices.get(j);
+//                     Arco arco= new Arco(origen,destino);
+//                     origen.addVecino(destino);
+//                     adyacentes.add(arco);
+//                     
+//
+//                }}}
+//        
+//        return new Grafo(vertices,adyacentes)
+//
+//        for(Vertice y:grafo.getVertices()){
+//            for (Vertice x: y.getAdyacente())
+//           System.out.println(y+"->"+x);
+//        }
+//        
+//       for (Vertice vertice :verticeList ){
+//           System.out.println(vertice+"-"+vertice.getcompId());
+//       }
+//         
+//    }verti
+        List<Vertice> vertices = new ArrayList<>();
+        List<Arco> adyacentes = new ArrayList<>();
 
-        for (int i=0; i< numVertices; i++){ //iteracion para agregar los vertices 
-            Vertice vertice= new Vertice(i);
-            verticeList.add(vertice);
-            
-    }
-            
-        for (int i =0 ; i < numVertices; i++){  //itera cada par de vertice
-            for (int j=0;j< numVertices;j++){
-                if (matrizAdyacencia[i][j]==1){ //agrega las relaciones de los vertices mediante artistas, evaluando si en la matriz el valor es 1.
-                    Vertice origen=verticeList.get(i);
-                     Vertice destino =verticeList.get(j);
-                     Arco arco= new Arco(origen,destino);
-                     origen.addVecino(destino);
-                     adyacentes.add(arco);
-                     
+        // Agrega vértices y arcos a las listas
 
-                }}}
+        Grafo graf = new Grafo(vertices, adyacentes);
+        List<Vertice> listaVertices = graf.getVertices();
+        List<Arco> listaArcos = graf.getAdyacentes();
         
-        Grafo constructor= new Grafo(verticeList,adyacentes);
-
-        for(Vertice y:grafo.getVertices()){
-            for (Vertice x: y.getAdyacente())
-           System.out.println(y+"->"+x);
-        }
-        
-       for (Vertice vertice :verticeList ){
-           System.out.println(vertice+"-"+vertice.getcompId());
-       }
-         
-    }
-        
-    }
+      
+    }}
     
 //        
 //    }

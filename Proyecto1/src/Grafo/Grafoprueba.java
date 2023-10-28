@@ -5,6 +5,7 @@
 package Grafo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class Grafoprueba<T> {
     
     public void agregarArista(T origen, T destino){
         adyacencia.get(origen).add(destino);
-        adyacencia.get(destino).add(origen);
+  
     }
     
     public List<T> obtenerAdyacente(T vertice){
@@ -65,15 +66,49 @@ public class Grafoprueba<T> {
 
         // Imprimir las aristas
         sb.append("Aristas:\n");
+        List<List<Integer>> aristas=getAristas();
+        for (List<Integer> arista:aristas){
+            sb.append(arista).append("\n");
+        }
+             return sb.toString();
+    }
+    
+    public List<List<Integer>> getAristas(){
+        List<T> vertices=ObtenerVertices();
+        List<List<Integer>> aristas=new ArrayList<>();
+        
         for (T origen : vertices) {
             for (T destino : obtenerAdyacente(origen)) {
-                sb.append(origen.toString()).append(" -> ").append(destino.toString()).append("\n");
+                int NoOrigen= Integer.parseInt(origen.toString());
+                int NoDestino= Integer.parseInt(destino.toString());
+                List<Integer> arista= Arrays.asList(NoOrigen,NoDestino);
+                aristas.add(arista);
             }
         }
-
-        
-        
-        return sb.toString();
-
+      
+        System.out.println("Aristas"+aristas);
+        return aristas;}
+    
+         public List<List<Integer>> getBidireccionales (List<List<Integer>> aristas){
+         List<List<Integer>> ParesBidireccionales= new ArrayList<>();
+         
+         for (List<Integer> arista: aristas){
+             int origen= arista.get(0);
+             int destino=arista.get(1);
+             
+             List<Integer> aristaInvertida= Arrays.asList(destino,origen);
+             
+             for (List<Integer> i :aristas){
+                 int iOrigen= i.get(0);
+                 int iDestino= i.get(1);
+             
+             if (iOrigen==aristaInvertida.get(0) && iDestino==aristaInvertida.get(1)){
+                 ParesBidireccionales.add(arista);
+                 break;
+             }}
+         }
+         System.out.println("PB:"+ParesBidireccionales);
+         return ParesBidireccionales;
     }
 }
+

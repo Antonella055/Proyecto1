@@ -9,6 +9,7 @@ import Grafo.ComponentesFConectados;
 import Grafo.GeneradorGrafo;
 import Grafo.Grafo;
 import Grafo.ConstructordeGrafoD;
+import Grafo.Grafoprueba;
 import Grafo.Vertice;
 import interfaces.VerGrafo;
 import java.io.FileNotFoundException;
@@ -27,11 +28,12 @@ import java.util.ArrayList;
 public class Main {
     public static void main (String[] args) throws FileNotFoundException, Exception{
            GestordeArchivo gestor = new GestordeArchivo();
+           Grafoprueba vertice= new Grafoprueba();
             VerGrafo ventana = new VerGrafo();
 
             // Crear una instancia de GeneradorGrafo con los parámetros gestor y ventana
             GeneradorGrafo generador = new GeneradorGrafo(gestor);
-            ConstructordeGrafoD cons= new ConstructordeGrafoD(gestor);
+            ConstructordeGrafoD cons= new ConstructordeGrafoD(gestor, vertice);
 
         
         ComponentesFConectados comp= new ComponentesFConectados();

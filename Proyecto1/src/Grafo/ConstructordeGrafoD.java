@@ -10,6 +10,7 @@ import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JFrame;
@@ -24,21 +25,21 @@ public class ConstructordeGrafoD {
     private final mxGraph grafos;
     private final HashMap <Integer, Object> vertexMap;
     private final List<String>usuarios;
+     private final  List<List<Integer>>vertices;
     private HashMap <Integer, String> usuarioMap;
     private final int [][] matrizAdyacencia; 
  
     
-    public ConstructordeGrafoD (GestordeArchivo gestor){ 
+    public ConstructordeGrafoD (GestordeArchivo gestor, Grafoprueba vertice){ 
         this.matrizAdyacencia= gestor.getMatriz();
         this.usuarios= gestor.getusuarios();
-        
-       
         grafos=new mxGraph();
         vertexMap=new HashMap();
         usuarioMap=new HashMap();
          grafo= new Grafoprueba<>();
-        
+         this.vertices= vertice.ObtenerVertices(); 
     }
+    
     
     public HashMap<Integer, String> crearMapaUser(List<String>usuarios) { //Crear un mapa de usuarios para vincular su posicion de matriz con su nombre de usuario
         HashMap<Integer, String> usuarioMap = new HashMap<>();
@@ -80,14 +81,20 @@ public class ConstructordeGrafoD {
           
         }
         
-    }
+    }   Grafoprueba arista= new Grafoprueba();
+        System.out.println(arista.getAristas()); 
          System.out.println(grafo.toString()); // printear el grafo JGraphT 
-         GrafoVisual(matrizAdyacencia);
+         GrafoVisual(matrizAdyacencia,vertices);
     }
     
-    
-    public void GrafoVisual(int[][] matrizAdyacencia){
+   
+        
+    public void GrafoVisual(int[][] matrizAdyacencia, List<List<Integer>> vertices){
         mxGraph visualgrafo= new mxGraph();
+        Grafoprueba arista= new Grafoprueba();
+        List<List<Integer>> aristas = arista.getAristas();
+        List<List<Integer>> bidireccional = arista.getBidireccionales(aristas);
+        
        int numVertices = matrizAdyacencia.length;
         Object parent= visualgrafo.getDefaultParent();
         visualgrafo.getModel().beginUpdate();
@@ -105,18 +112,21 @@ public class ConstructordeGrafoD {
         visualgrafo.getModel().beginUpdate();
         try{
             for(int i=0;i<numVertices; i++){
-                for (int j=0;j<numVertices; j++){
+                for (int j=i;j<numVertices; j++){
                     if (matrizAdyacencia[i][j]==1){
                         visualgrafo.insertEdge(parent, null, "", vertexMap.get(i), vertexMap.get(j));
+                        if (bidireccional.contains(Arrays.asList(i, j)) || bidireccional.contains(Arrays.asList(j, i))){
+                            visualgrafo.insertEdge(parent, null, "", vertexMap.get(j), vertexMap.get(i));
                     }
+                        }
+                        
                 }
             }
         }finally{
             visualgrafo.getModel().endUpdate();
         }
         
-        mxCompactTreeLayout layout = new mxCompactTreeLayout(visualgrafo);
-        layout.setHorizontal(false);
+        mxGraphLayout layout = new mxHierarchicalLayout(visualgrafo);
         layout.execute(visualgrafo.getDefaultParent());
 
         // Crear un componente de grafo y mostrarlo en una ventana

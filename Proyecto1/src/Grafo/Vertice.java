@@ -22,7 +22,7 @@ public class Vertice {
     
 
     
-    public Vertice(int Id){
+    public Vertice(int Id,String nombre){
         this.Id= Id;
         this.nombre= nombre;
         this.adyacentes= new ArrayList<>();
@@ -44,8 +44,8 @@ public class Vertice {
         return compId;
     }
     
-    public String getNombre(){
-        return this.nombre;
+    public String Usuario(){
+        return nombre;
     }
     public boolean Vistado(){
         return visitado;
@@ -62,6 +62,8 @@ public class Vertice {
     public String toString(){
         return this.nombre;
     }
+    
+    
     
          }
   

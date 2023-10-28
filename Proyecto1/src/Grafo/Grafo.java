@@ -43,33 +43,7 @@ public class Grafo {
         this.adyacentes=adyacente;
     }
     
-    public static Grafo construirGrafoDesdeMatrizAdyacencia(boolean[][] matrizAdyacencia) {
-        List<Vertice> vertices = new ArrayList<>();
-        List<Arco> adyacentes = new ArrayList<>();
-        
-        int numVertices = matrizAdyacencia.length;
-        
-        // Crear los vértices
-        for (int i = 0; i < numVertices; i++) {
-            Vertice vertice = new Vertice(i);
-            vertices.add(vertice);
-        }
-        
-        // Crear los arcos
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                if (matrizAdyacencia[i][j]) {
-                    Vertice origen = vertices.get(i);
-                    Vertice destino = vertices.get(j);
-                    Arco arco = new Arco(origen, destino);
-                    adyacentes.add(arco);
-                }
-            }             
-
-        }
-        
-        return new Grafo(vertices, adyacentes);
-        
+    
         
     }
     

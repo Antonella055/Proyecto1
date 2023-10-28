@@ -37,8 +37,7 @@ public class GeneradorGrafo  {
     public JPanel panelGrafo;
     private final HashMap <Integer, Object> vertexMap;
     private final HashMap<Integer, String>usuario;
-    private final HashMap<Integer, List<String>>usuarioMap;
-    HashMap<Integer,String> crearMapaUsers;
+    HashMap<Integer,String> usuariosMap;
 
   
     private Object parent;
@@ -50,7 +49,7 @@ public class GeneradorGrafo  {
         this.matrizAdyacencia= gestor.getMatriz();
         this.usuarios= gestor.getusuarios();
         grafo= new mxGraph();
-        usuarioMap= new HashMap<>();
+        usuariosMap= new HashMap<>();
         vertices= new ArrayList<>();
         vertexMap=new HashMap();
         usuario=new HashMap<>();
@@ -59,26 +58,27 @@ public class GeneradorGrafo  {
     }
     
      public HashMap<Integer, String> crearMapaUser(List<String>usuarios) { //Crear un mapa de usuarios para vincular su posicion de matriz con su nombre de usuario
-        HashMap<Integer, String> usuario = new HashMap<>();
+        HashMap<Integer, String> usuarioMap = new HashMap<>();
         for (int i=0; i< usuarios.size(); i++){
-            usuario.put(i, usuarios.get(i)); //agregar el valor posicion y el user al mapa
+            usuarioMap.put(i, usuarios.get(i)); //agregar el valor posicion y el user al mapa
         }
-        return usuario;
+        return usuarioMap;
     }
+    
      
      public List<String> getUsuario(){
          return new ArrayList<>(usuario.values());
      }
-    public void generarGrafo (int[][] matrizAdyacencia) throws Exception{
+    public void generarGrafo (int[][] matrizAdyacencia,HashMap <Integer,String> usuarioMap) throws Exception{
         // Agrega más usuarios si es necesario
         mxGraph grafo= new mxGraph();
-        HashMap<Integer, String> mapaUsuarios = crearMapaUser(usuarios);
+        
         
         
         for (int i=0; i< matrizAdyacencia.length; i++){ //iteracion para agregar los vertices 
-            Vertice vertice = new Vertice(i);
+            Vertice vertice = new Vertice(i,usuariosMap.get(i));
             vertices.add(vertice);
-            usuarioMap.put(i, getUsuario());
+            vertexMap.put(i, getUsuario());
         }
         for (int i=0; i< matrizAdyacencia.length; i++){
              for (int j=i+1;j< matrizAdyacencia[i].length;j++){
@@ -90,9 +90,10 @@ public class GeneradorGrafo  {
                    
                     }
                 }}
+    System.out.println(vertexMap);
     System.out.println(vertices);
     ImprimirG();
-    GrafoVisual(usuarioMap);
+//    GrafoVisual(usuarioMap);
     }
     //Output de los pares (eliminar)
     public void ImprimirG (){

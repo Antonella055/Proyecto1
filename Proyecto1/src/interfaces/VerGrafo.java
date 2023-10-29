@@ -9,7 +9,9 @@ import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
+import java.awt.BorderLayout;
 import java.awt.Panel;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import proyecto1.GestordeArchivo;
 
@@ -19,14 +21,30 @@ import proyecto1.GestordeArchivo;
  */
 public class VerGrafo extends javax.swing.JFrame {
     private mxGraph grafo;
-    private mxGraphComponent graphComponent;
+    private JPanel GrafoPane;
     
     /**
      * Creates new form VerGrafo
      */
+    
+    private void componentesVent(){ 
+        GrafoPane= new JPanel();
+        getContentPane().add(GrafoPane,BorderLayout.CENTER);
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800,600);
+        setVisible(true);
+    }
+    public void mostrargrafo(mxGraph graf){
+        mxGraphComponent elementosgrafo=new mxGraphComponent(graf);
+        GrafoPane.add(elementosgrafo);
+        GrafoPane.revalidate();
+    }
+    
     public VerGrafo() {
         initComponents();
-        GestordeArchivo gestor = new GestordeArchivo();
+       
+        
         
        
       
@@ -35,13 +53,7 @@ public class VerGrafo extends javax.swing.JFrame {
         
     }
     
-    public void visualizarGrafo(JPanel panel, mxGraph grafo) {
-      
-        mxGraphComponent graphComponent = new mxGraphComponent(grafo);
-        mxGraphLayout layout = new mxHierarchicalLayout(grafo);
-        PanelGrafo.add(graphComponent);
-        
-    }
+   
     
 
     /**
@@ -54,78 +66,44 @@ public class VerGrafo extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
-        GrafoPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        PanelGrafo = new javax.swing.JPanel();
+        GrafoPane = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        GrafoPanel.setForeground(new java.awt.Color(102, 102, 102));
-        GrafoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        GrafoPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setText(" Ver Matriz");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Matriz de Adyacencia");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        GrafoPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 663, 256, -1));
+        GrafoPane.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 489, 217, -1));
 
-        jButton3.setBackground(new java.awt.Color(0, 102, 102));
-        jButton3.setText("Ver grafo String");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        GrafoPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 663, 256, -1));
-
-        PanelGrafo.setBackground(new java.awt.Color(51, 51, 51));
-        PanelGrafo.setForeground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout PanelGrafoLayout = new javax.swing.GroupLayout(PanelGrafo);
-        PanelGrafo.setLayout(PanelGrafoLayout);
-        PanelGrafoLayout.setHorizontalGroup(
-            PanelGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        PanelGrafoLayout.setVerticalGroup(
-            PanelGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        GrafoPanel.add(PanelGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 329));
+        jButton5.setText("Vertices");
+        GrafoPane.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 489, 217, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(GrafoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(GrafoPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(GrafoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(GrafoPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,11 +142,10 @@ public class VerGrafo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel GrafoPanel;
-    private javax.swing.JPanel PanelGrafo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel GrafoPane;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     // End of variables declaration//GEN-END:variables
 
 

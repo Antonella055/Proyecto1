@@ -9,12 +9,17 @@ import com.mxgraph.layout.mxCompactTreeLayout;
 import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
+import interfaces.VerGrafo;
+import interfaces.VisualGrafo;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import proyecto1.GestordeArchivo;
+import static proyecto1.GestordeArchivo.mostrarmatrizAdyacencia;
 
 /**
  *
@@ -87,16 +92,16 @@ public class ConstructordeGrafoD {
           
         }
         
-    }   Grafoprueba arista= new Grafoprueba();
+    }   
          
-         System.out.println(grafo.toString()); // printear el grafo JGraphT 
+         System.out.println(grafo.toString()); 
          GrafoVisual(matrizAdyacencia,vertices,Pares);
     }
     
    
-        
     public void GrafoVisual(int[][] matrizAdyacencia, List<List<Integer>> vertices,  List<List<Integer>>Pares){
         mxGraph visualgrafo= new mxGraph();
+        visualgrafo.setCellsEditable(false);
    
        int numVertices = matrizAdyacencia.length;
         Object parent= visualgrafo.getDefaultParent();
@@ -123,17 +128,30 @@ public class ConstructordeGrafoD {
             visualgrafo.getModel().endUpdate();
         }
         
-       
+        VisualGrafo frame=new VisualGrafo();
+
+        JPanel PanelGrafo= frame.getPanelGrafo();
+      
+        
         mxGraphLayout layout = new mxHierarchicalLayout(visualgrafo);
         layout.execute(visualgrafo.getDefaultParent());
-
-        // Crear un componente de grafo y mostrarlo en una ventana
+        PanelGrafo.setLayout(new BorderLayout());
+        
+        
         mxGraphComponent graphComponent = new mxGraphComponent(visualgrafo);
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(graphComponent);
+      
+        
+        PanelGrafo.add(graphComponent);
+        PanelGrafo.revalidate();
+        PanelGrafo.repaint();
         frame.pack();
         frame.setVisible(true);
+        PanelGrafo.setVisible(true);
+        
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add(graphComponent);
+//        frame.pack();
+//        frame.setVisible(true);
         
     }
     

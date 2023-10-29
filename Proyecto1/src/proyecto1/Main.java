@@ -45,7 +45,7 @@ public class Main {
       
         int[][] matrizAdyacencia = gestor.crearmatrizAdyacencia(usuarios,relaciones);
 //     
-       gestor.mostrarmatrizAdyacencia(matrizAdyacencia, usuarios);
+//       gestor.mostrarmatrizAdyacencia(matrizAdyacencia, usuarios);
 //        generador.generarGrafo(matrizAdyacencia, usuarioMap);
         cons.generarGrafo(matrizAdyacencia, usuarioMap);
         

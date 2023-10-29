@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 
 import javax.swing.JTextArea;
@@ -34,9 +35,9 @@ public class GestordeArchivo {
     public static File selectedFile; 
     public int[][] matrizAdyacencia;
     private List<String> usuarios;
+
     
-    
-    
+
     
     public static void ArchivoSeleccionado() throws FileNotFoundException{
         JFileChooser fileChooser = new JFileChooser(); //JFileChooser ->abrir un cuadro de diálogo donde el usuario puede elegir un fichero a través del explorador de archivos de su equipo.
@@ -144,19 +145,23 @@ public class GestordeArchivo {
     }
     
     
-    public static void mostrarmatrizAdyacencia(int[][] matrizAdyacencia, List<String> usuarios) {
-        System.out.print("  \t");
-        for (String usuario : usuarios) {
-            System.out.print(usuario + " \t");
-        }
-        System.out.println();
-
-        for (int i = 0; i < matrizAdyacencia.length; i++) {
-            System.out.print(usuarios.get(i) + " \t");
-            for (int j = 0; j < matrizAdyacencia[i].length; j++) {
-                System.out.print(matrizAdyacencia[i][j] + " \t");
+    public static StringBuilder mostrarmatrizAdyacencia(int[][] matrizAdyacencia, List<String> usuarios) {
+            
+        StringBuilder sb= new StringBuilder();
+            sb.append("  \t");
+            for (String usuario : usuarios) {
+                sb.append(usuario).append(" \t");
             }
-            System.out.println();
+            sb.append("\n");
+
+            for (int i = 0; i < matrizAdyacencia.length; i++) {
+                sb.append(usuarios.get(i)).append(" \t");
+                for (int j = 0; j < matrizAdyacencia[i].length; j++) {
+                    sb.append(matrizAdyacencia[i][j]).append(" \t");
+                }
+                sb.append("\n");
+            }
+        return sb;
         }
     }
     

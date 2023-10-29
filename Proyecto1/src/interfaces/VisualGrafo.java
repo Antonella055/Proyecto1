@@ -11,7 +11,10 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import proyecto1.GestordeArchivo;
+import static proyecto1.GestordeArchivo.mostrarmatrizAdyacencia;
 
 /**
  *
@@ -27,6 +31,7 @@ import proyecto1.GestordeArchivo;
 public class VisualGrafo extends javax.swing.JFrame {
         private ConstructordeGrafoD grafo;
         private String matrizString;
+        
        
     /**
      * Creates new form VisualGrafo
@@ -39,6 +44,7 @@ public class VisualGrafo extends javax.swing.JFrame {
                 matrizBttonActionPerformed(evt);
             }
         });
+       
         }
         
     public void mostrarMatriz(){
@@ -61,10 +67,7 @@ public class VisualGrafo extends javax.swing.JFrame {
     public JPanel getPanelGrafo(){
         return PanelGrafo;
     }
-    public void actualizarTxtPane(){
-        GestordeArchivo matriz= new GestordeArchivo();
-        InformacionStr.setText(matrizString);
-    }
+
    
     public void actualizarTxtPane(String matrizString) {
     InformacionStr.setText(matrizString);
@@ -214,15 +217,14 @@ public class VisualGrafo extends javax.swing.JFrame {
     private void matrizBttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matrizBttonActionPerformed
 //         TODO add your handling code here:
          GestordeArchivo gestor= new GestordeArchivo();
-        int[] [] matrizAdyacencia= gestor.getMatriz();
-        List<String> usuarios= gestor.getusuarios();
-        gestor.mostrarmatrizAdyacencia(matrizAdyacencia, usuarios);
+        Map<String, List<String>> relaciones = gestor. obtenerRelaciones();
+        List<String> usuarios = gestor.obtenerUsuarios(relaciones);
+        System.out.println(usuarios);
+        int[][] matrizAdyacencia = gestor.crearmatrizAdyacencia(usuarios, relaciones);
+        
+       InformacionStr.setText(mostrarmatrizAdyacencia(matrizAdyacencia, usuarios).toString());
+        
         System.out.println("Boton presionadp");
-        GestordeArchivo m= new GestordeArchivo();
-        
-        String matrizStr=matrizString;
-        InformacionStr.setText(matrizStr);
-        
     }//GEN-LAST:event_matrizBttonActionPerformed
 
     /**

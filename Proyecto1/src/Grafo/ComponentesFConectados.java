@@ -18,7 +18,7 @@ public class ComponentesFConectados {
         
         public ComponentesFConectados(){
             GestordeArchivo gestor= new GestordeArchivo();
-            GeneradorGrafo grafo= new GeneradorGrafo(gestor);
+           
          
             
 }

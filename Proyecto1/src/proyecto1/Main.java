@@ -6,12 +6,10 @@ package proyecto1;
 
 import Grafo.Arco;
 import Grafo.ComponentesFConectados;
-import Grafo.GeneradorGrafo;
-import Grafo.Grafo;
 import Grafo.ConstructordeGrafoD;
 import Grafo.Grafoprueba;
 import Grafo.Vertice;
-import interfaces.VerGrafo;
+
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +27,8 @@ public class Main {
     public static void main (String[] args) throws FileNotFoundException, Exception{
            GestordeArchivo gestor = new GestordeArchivo();
            Grafoprueba vertice= new Grafoprueba();
-            VerGrafo ventana = new VerGrafo();
-
-            // Crear una instancia de GeneradorGrafo con los parámetros gestor y ventana
-            GeneradorGrafo generador = new GeneradorGrafo(gestor);
+           
+            // Crear una instancia de GeneradorGrafo con los parámetros gestor y ventana 
             ConstructordeGrafoD cons= new ConstructordeGrafoD(gestor, vertice);
 
         
@@ -42,11 +38,10 @@ public class Main {
 
         List<String> usuarios=gestor.obtenerUsuarios(relaciones);
         
-        HashMap<Integer, String> usuarioMap = generador.crearMapaUser(usuarios);
+        HashMap<Integer, String> usuarioMap = cons.crearMapaUser(usuarios);
         
         List<Vertice> vertices= new ArrayList();
         List<Arco> adyacentes=new ArrayList();
-         Grafo grafo = new Grafo(vertices,adyacentes);
       
         int[][] matrizAdyacencia = gestor.crearmatrizAdyacencia(usuarios,relaciones);
 //     

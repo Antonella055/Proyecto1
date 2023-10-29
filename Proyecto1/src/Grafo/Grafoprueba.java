@@ -20,6 +20,7 @@ public class Grafoprueba<T> {
     
     public Grafoprueba(){
         adyacencia=new HashMap<>();
+       
     }
     
     public void agregarVertice(T vertice){
@@ -70,6 +71,7 @@ public class Grafoprueba<T> {
         for (List<Integer> arista:aristas){
             sb.append(arista).append("\n");
         }
+        
              return sb.toString();
     }
     
@@ -84,30 +86,25 @@ public class Grafoprueba<T> {
                 List<Integer> arista= Arrays.asList(NoOrigen,NoDestino);
                 aristas.add(arista);
             }
+        }System.out.println("a:" +aristas);
+        List<List<Integer>> paresDoblementeConectados =getBidireccionales(aristas);
+        for (List<Integer> par : paresDoblementeConectados) {
+            System.out.println("pares"+par);
         }
-      
-        System.out.println("Aristas"+aristas);
+    
         return aristas;}
+    
     
          public List<List<Integer>> getBidireccionales (List<List<Integer>> aristas){
          List<List<Integer>> ParesBidireccionales= new ArrayList<>();
          
          for (List<Integer> arista: aristas){
-             int origen= arista.get(0);
-             int destino=arista.get(1);
+              List<Integer> aristaInversa = Arrays.asList(arista.get(1), arista.get(0));
              
-             List<Integer> aristaInvertida= Arrays.asList(destino,origen);
-             
-             for (List<Integer> i :aristas){
-                 int iOrigen= i.get(0);
-                 int iDestino= i.get(1);
-             
-             if (iOrigen==aristaInvertida.get(0) && iDestino==aristaInvertida.get(1)){
-                 ParesBidireccionales.add(arista);
-                 break;
-             }}
+            if (aristas.contains(aristaInversa)){
+                ParesBidireccionales.add(arista);
+            }
          }
-         System.out.println("PB:"+ParesBidireccionales);
          return ParesBidireccionales;
     }
 }

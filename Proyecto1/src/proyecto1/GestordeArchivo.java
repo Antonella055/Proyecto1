@@ -92,8 +92,13 @@ public class GestordeArchivo {
                                         relaciones.put(usuario2,new ArrayList<>());
                                     }
                                     
-                                    relaciones.get(usuario1).add(usuario2);
-                                    relaciones.get(usuario2).add(usuario1);
+                                    if (relaciones.get(usuario2).contains(usuario1)){
+                                        relaciones.get(usuario1).add(usuario2);
+                                        relaciones.get(usuario2).add(usuario1);
+                                    }else{
+                                        relaciones.get(usuario1).add(usuario2);
+                                    }
+                          
                                 }
                             }
                         }
@@ -121,7 +126,10 @@ public class GestordeArchivo {
 
             for (String conexion : conexiones) {
                 int j = usuarios.indexOf(conexion);
-                matrizAdyacencia[i][j] = 1;
+                matrizAdyacencia[i][j]=1;
+                if(!relaciones.get(conexion).contains(usuario)){
+                    matrizAdyacencia[j][i]=0;
+                }
             }
         }
 

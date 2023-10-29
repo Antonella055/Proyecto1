@@ -24,8 +24,7 @@ relaciones
 @juli8, @mia
 @juli8,@seba
 @julio,@male
-@julio,@carl
 @carl, @ale
 @carl,@julio
 
-  
+   

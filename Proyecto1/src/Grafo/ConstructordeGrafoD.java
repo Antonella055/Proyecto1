@@ -21,18 +21,24 @@ import proyecto1.GestordeArchivo;
  * @author Antonella
  */
 public class ConstructordeGrafoD {
-    private Grafoprueba <Integer> grafo;
+    private final Grafoprueba <Integer> grafo;
     private final mxGraph grafos;
     private final HashMap <Integer, Object> vertexMap;
     private final List<String>usuarios;
      private final  List<List<Integer>>vertices;
     private HashMap <Integer, String> usuarioMap;
     private final int [][] matrizAdyacencia; 
+    private final  List<List<Integer>> Pares;
+    private final List<List<Integer>> bidireccionales;
+    
  
     
     public ConstructordeGrafoD (GestordeArchivo gestor, Grafoprueba vertice){ 
+        this.Pares= vertice.getAristas();
         this.matrizAdyacencia= gestor.getMatriz();
         this.usuarios= gestor.getusuarios();
+        this.bidireccionales= vertice.getBidireccionales(Pares);
+        
         grafos=new mxGraph();
         vertexMap=new HashMap();
         usuarioMap=new HashMap();
@@ -71,7 +77,7 @@ public class ConstructordeGrafoD {
                 if (matrizAdyacencia[i][j]==1){ //agrega las relaciones de los vertices mediante artistas, evaluando si en la matriz el valor es 1.
                     grafo.agregarArista(i,j);
                     
-                    }
+                 }
                 }
         for (Integer origen: grafo.ObtenerVertices()){ //iteracion sobre las aristas del grafo
             for (Integer destino: grafo.obtenerAdyacente(origen)){
@@ -82,19 +88,16 @@ public class ConstructordeGrafoD {
         }
         
     }   Grafoprueba arista= new Grafoprueba();
-        System.out.println(arista.getAristas()); 
+         
          System.out.println(grafo.toString()); // printear el grafo JGraphT 
-         GrafoVisual(matrizAdyacencia,vertices);
+         GrafoVisual(matrizAdyacencia,vertices,Pares);
     }
     
    
         
-    public void GrafoVisual(int[][] matrizAdyacencia, List<List<Integer>> vertices){
+    public void GrafoVisual(int[][] matrizAdyacencia, List<List<Integer>> vertices,  List<List<Integer>>Pares){
         mxGraph visualgrafo= new mxGraph();
-        Grafoprueba arista= new Grafoprueba();
-        List<List<Integer>> aristas = arista.getAristas();
-        List<List<Integer>> bidireccional = arista.getBidireccionales(aristas);
-        
+   
        int numVertices = matrizAdyacencia.length;
         Object parent= visualgrafo.getDefaultParent();
         visualgrafo.getModel().beginUpdate();
@@ -103,29 +106,24 @@ public class ConstructordeGrafoD {
                 String nodo= usuarioMap.get(i);
                 Object vertex =visualgrafo.insertVertex(parent, "", nodo, 20,20, 80, 30);
                 vertexMap.put(i, vertex);
+                
             }
             
-        }finally{
-            visualgrafo.getModel().endUpdate();
-        }
-        
-        visualgrafo.getModel().beginUpdate();
-        try{
-            for(int i=0;i<numVertices; i++){
-                for (int j=i;j<numVertices; j++){
-                    if (matrizAdyacencia[i][j]==1){
+            for (int i = 0; i < numVertices; i++) {
+            for (int j = i+1; j < numVertices; j++) {
+                if (matrizAdyacencia[i][j]==1){
                         visualgrafo.insertEdge(parent, null, "", vertexMap.get(i), vertexMap.get(j));
-                        if (bidireccional.contains(Arrays.asList(i, j)) || bidireccional.contains(Arrays.asList(j, i))){
-                            visualgrafo.insertEdge(parent, null, "", vertexMap.get(j), vertexMap.get(i));
-                    }
-                        }
-                        
-                }
+                
+                }if(matrizAdyacencia[j][i]==1){
+                     visualgrafo.insertEdge(parent, null, "", vertexMap.get(j), vertexMap.get(i));
+               
             }
+            }}
         }finally{
             visualgrafo.getModel().endUpdate();
         }
         
+       
         mxGraphLayout layout = new mxHierarchicalLayout(visualgrafo);
         layout.execute(visualgrafo.getDefaultParent());
 

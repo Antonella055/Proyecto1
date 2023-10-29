@@ -4,7 +4,7 @@
  */
 package interfaces;
 
-import Grafo.GeneradorGrafo;
+
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
@@ -27,7 +27,7 @@ public class VerGrafo extends javax.swing.JFrame {
     public VerGrafo() {
         initComponents();
         GestordeArchivo gestor = new GestordeArchivo();
-        GeneradorGrafo generador=new  GeneradorGrafo(gestor);
+        
        
       
         

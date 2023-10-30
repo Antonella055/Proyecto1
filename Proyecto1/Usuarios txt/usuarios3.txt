@@ -1,0 +1,43 @@
+usuarios
+@a
+@maria29
+@juanito88
+@lucia_45
+@pedro_12
+@ana_77
+@carlos90
+@sofia_63
+@diego_21
+@laura_99
+@roberto_55
+@isabel_34
+@javier_67
+@natalia_23
+@fernando_81
+
+relaciones
+@maria29, @juanito88
+@juanito88, @lucia_45
+@juanito88, @pedro_12
+@pedro_12, @ana_77
+@ana_77, @maria29
+@lucia_45, @carlos90
+@carlos90, @juanito88
+@carlos90, @sofia_63
+@sofia_63, @diego_21
+@diego_21, @lucia_45
+@pedro_12, @fernando_81
+@fernando_81, @juanito88
+@claudia_42, @diego_21
+@valentina_18, @fernando_81
+@valentina_18,@paola_85
+@daniel_87, @maria29
+@daniel_87, @mariana_50
+@mariana_50, @eduardo_29
+@eduardo_29, @andrea_94
+@andrea_94, @alejandro_39
+@alejandro_39, @ricardo_61
+@ricardo_61, @paola_85
+@paola_85,@ricardo_61
+@paola_85,@valentina_18
+@a,@ana_77

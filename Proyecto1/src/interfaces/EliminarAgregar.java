@@ -134,7 +134,7 @@ public class EliminarAgregar extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new MenuPrincipal().setVisible(true);
+//        new().setVisible(true);
     }//GEN-LAST:event_SalirActionPerformed
 
     /**

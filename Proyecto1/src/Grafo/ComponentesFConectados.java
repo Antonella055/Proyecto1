@@ -4,7 +4,6 @@
  */
 package Grafo;
 
-import static java.lang.System.out;
 import java.util.Stack;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
@@ -15,6 +14,8 @@ import proyecto1.GestordeArchivo;
  * @author Antonella
  */
 public class ComponentesFConectados {
+    
+        
         
         public ComponentesFConectados(){
             GestordeArchivo gestor= new GestordeArchivo();

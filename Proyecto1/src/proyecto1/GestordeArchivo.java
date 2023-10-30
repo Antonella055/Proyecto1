@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
+
 
 
 import javax.swing.JTextArea;
@@ -32,7 +32,7 @@ public class GestordeArchivo {
     /**
      * @throws java.io.FileNotFoundException
      */
-    public static File selectedFile; 
+    private static File selectedFile; 
     public int[][] matrizAdyacencia;
     private List<String> usuarios;
 
@@ -68,23 +68,24 @@ public class GestordeArchivo {
     public static Map<String, List<String>> obtenerRelaciones() {
                     Map<String, List<String>> relaciones = new HashMap<>();
 
-                    try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+                    try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) { //leer el contenido linea por linea de SelectedFile
                         String linea;
-                       boolean leerUsuarios= true;
+                       boolean leerUsuarios= true; 
                        boolean leerRelaciones= false;
-                       List<String> usuarios = new ArrayList<>();
+                       List<String> usuarios = new ArrayList<>(); //almacena los nombres de usuario leidos 
 
-                        while ((linea = br.readLine()) != null) {
-                            if (linea.equals("relaciones")){
+                        while ((linea = br.readLine()) != null) { //leer archivo hasta llegar al final 
+                            if (linea.equals("relaciones")){ // Si se llega a la linea con indice de relaciones el programa comenzara a leer las relaciones de cada usuario 
                                 leerUsuarios= false;
                                 leerRelaciones=true;
-                            }else if (leerUsuarios){
+                            }else if (leerUsuarios){ //si leer usuarios es true, se agrega el nombre de usuario a la lista usuarios
                                 usuarios.add(linea.trim());
-                            }else if (leerRelaciones){
+                            }else if (leerRelaciones){ //se divide la linea en partes usando "," . Si hay al menos dos partes significa que hay una relacion y se agrega al Map 
                                 String [] partes= linea.split(",");
                                 if (partes.length >=2){
                                     String usuario1=partes[0].trim();
                                     String usuario2=partes[1].trim();
+                                    
                                     
                                     if (!relaciones.containsKey(usuario1)){
                                         relaciones.put(usuario1,new ArrayList<>());
@@ -93,6 +94,7 @@ public class GestordeArchivo {
                                         relaciones.put(usuario2,new ArrayList<>());
                                     }
                                     
+                                    //en caso de ser bidireccionales las conexiones
                                     if (relaciones.get(usuario2).contains(usuario1)){
                                         relaciones.get(usuario1).add(usuario2);
                                         relaciones.get(usuario2).add(usuario1);
@@ -112,7 +114,7 @@ public class GestordeArchivo {
 
     public static List<String> obtenerUsuarios(Map<String, List<String>> relaciones) {
         List<String> usuarios = new ArrayList<>(relaciones.keySet());
-        Collections.sort(usuarios); //ordenar alf
+        Collections.sort(usuarios); //ordenar alfabeticamente
         return usuarios;
     }
 
@@ -147,17 +149,17 @@ public class GestordeArchivo {
     
     public static StringBuilder mostrarmatrizAdyacencia(int[][] matrizAdyacencia, List<String> usuarios) {
             
-        StringBuilder sb= new StringBuilder();
+        StringBuilder sb= new StringBuilder(); //crear instancia de Stringbuilder para almacenar el texto de la matriz 
             sb.append("  \t");
-            for (String usuario : usuarios) {
-                sb.append(usuario).append(" \t");
+            for (String usuario : usuarios) { //iterar lista de usuarios
+                sb.append(usuario).append(" \t"); //se agrega cada nombre de usuario al StringBuilder, seguido de un espacio y un tabulador.
             }
-            sb.append("\n");
+            sb.append("\n"); // Despues de agregar los usuarios en la primera fila, se agrega un salto de linea 
 
-            for (int i = 0; i < matrizAdyacencia.length; i++) {
+            for (int i = 0; i < matrizAdyacencia.length; i++) { //iterar en las filas de la matriz
                 sb.append(usuarios.get(i)).append(" \t");
                 for (int j = 0; j < matrizAdyacencia[i].length; j++) {
-                    sb.append(matrizAdyacencia[i][j]).append(" \t");
+                    sb.append(matrizAdyacencia[i][j]).append(" \t"); //se agrega el valor de la matriz de adyacencia correspondiente a la fila y columna actual
                 }
                 sb.append("\n");
             }
@@ -165,7 +167,7 @@ public class GestordeArchivo {
         }
     }
     
-    }
+    
 
 
             

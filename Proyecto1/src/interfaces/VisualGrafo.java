@@ -5,24 +5,20 @@
 package interfaces;
 
 import Grafo.ConstructordeGrafoD;
-import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.view.mxGraph;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
+
+import javax.swing.table.DefaultTableModel;
 import proyecto1.GestordeArchivo;
-import static proyecto1.GestordeArchivo.mostrarmatrizAdyacencia;
+
 
 /**
  *
@@ -38,21 +34,18 @@ public class VisualGrafo extends javax.swing.JFrame {
      */
     public VisualGrafo() {
         initComponents();
-        matrizBtton.addActionListener(new ActionListener(){
-             @Override
-            public void actionPerformed(ActionEvent evt) {
-                matrizBttonActionPerformed(evt);
-            }
-        });
-       
-        }
-        
-    public void mostrarMatriz(){
+        InformacionMtriz.setVisible(false);
         
       
-        
-        actualizarTxtPane(matrizString);
+            InformacionUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                InformacionUserActionPerformed(evt);
+            }
+        });
     }
+        
+
     
     
      public void componentesVent(){ 
@@ -69,9 +62,7 @@ public class VisualGrafo extends javax.swing.JFrame {
     }
 
    
-    public void actualizarTxtPane(String matrizString) {
-    InformacionStr.setText(matrizString);
-}
+  
    
 
     /**
@@ -84,24 +75,26 @@ public class VisualGrafo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        Vertices = new javax.swing.JButton();
+        InformacionUser = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         PanelGrafo = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        Volver = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        InformacionStr = new javax.swing.JTextPane();
         matrizBtton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        InformacionMtriz = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Vertices.setText("Vertices");
-        Vertices.addActionListener(new java.awt.event.ActionListener() {
+        InformacionUser.setBackground(new java.awt.Color(102, 255, 204));
+        InformacionUser.setForeground(new java.awt.Color(0, 0, 0));
+        InformacionUser.setText("Informacion de Usuario");
+        InformacionUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VerticesActionPerformed(evt);
+                InformacionUserActionPerformed(evt);
             }
         });
 
@@ -111,17 +104,17 @@ public class VisualGrafo extends javax.swing.JFrame {
         PanelGrafo.setLayout(PanelGrafoLayout);
         PanelGrafoLayout.setHorizontalGroup(
             PanelGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 872, Short.MAX_VALUE)
+            .addGap(0, 807, Short.MAX_VALUE)
         );
         PanelGrafoLayout.setVerticalGroup(
             PanelGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButton3.setText("Volver");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Volver.setText("Volver");
+        Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                VolverActionPerformed(evt);
             }
         });
 
@@ -133,11 +126,11 @@ public class VisualGrafo extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 45, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(InformacionStr);
-
+        matrizBtton.setBackground(new java.awt.Color(102, 255, 204));
+        matrizBtton.setForeground(new java.awt.Color(0, 0, 0));
         matrizBtton.setText("Matriz");
         matrizBtton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,51 +138,58 @@ public class VisualGrafo extends javax.swing.JFrame {
             }
         });
 
+        InformacionMtriz.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(InformacionMtriz);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(PanelGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 166, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(20, 20, 20))
+                        .addGap(332, 332, 332)
+                        .addComponent(Volver))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Vertices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)
-                            .addComponent(matrizBtton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(matrizBtton, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(InformacionUser, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PanelGrafo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(88, 88, 88)
                 .addComponent(matrizBtton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(Vertices, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(InformacionUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addContainerGap())
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addComponent(PanelGrafo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Volver)))
         );
 
         pack();
@@ -197,34 +197,59 @@ public class VisualGrafo extends javax.swing.JFrame {
 
     
         
-    private void VerticesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerticesActionPerformed
+    private void InformacionUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformacionUserActionPerformed
         // TODO add your handling code here:
-        JFrame ventanaVert= new JFrame("Lista de Vertices");
+        GestordeArchivo gestor= new GestordeArchivo();
+        Map<String, List<String>> relaciones = gestor. obtenerRelaciones(); //Obtener las relaciones
+        List<String> usuarios = gestor.obtenerUsuarios(relaciones); //Obtener la lista de usuarios
         
+        DefaultTableModel modelo= new DefaultTableModel();
+        modelo.addColumn("Usuarios");
+        modelo.addColumn("Relaciones");
         
-        JTextArea texto= new JTextArea(grafo.toString());
-        InformacionStr.setEditable(false);
-        
-        ventanaVert.getContentPane().add(new JScrollPane(texto));
-        ventanaVert.pack();
-        ventanaVert.setVisible(true);
-    }//GEN-LAST:event_VerticesActionPerformed
+        for (String usuario:usuarios){
+            List<String> Lrelaciones= relaciones.get(usuario);
+            StringBuilder relacionesStr= new StringBuilder();
+            for (String relacion: Lrelaciones){
+                relacionesStr.append(relacion).append(",");
+            }
+            if (relacionesStr.length()>0){
+                relacionesStr.delete(relacionesStr.length()-2, relacionesStr.length());
+            }
+            Object[] data={usuario,relacionesStr.toString()};
+            modelo.addRow(data);
+        }
+        InformacionMtriz.setVisible(true);
+        InformacionMtriz.setModel(modelo);
+    }//GEN-LAST:event_InformacionUserActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+         this.setVisible(false);
+    }//GEN-LAST:event_VolverActionPerformed
 
     private void matrizBttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matrizBttonActionPerformed
 //         TODO add your handling code here:
          GestordeArchivo gestor= new GestordeArchivo();
-        Map<String, List<String>> relaciones = gestor. obtenerRelaciones();
-        List<String> usuarios = gestor.obtenerUsuarios(relaciones);
-        System.out.println(usuarios);
-        int[][] matrizAdyacencia = gestor.crearmatrizAdyacencia(usuarios, relaciones);
+        Map<String, List<String>> relaciones = gestor. obtenerRelaciones(); //Obtener las relaciones
+        List<String> usuarios = gestor.obtenerUsuarios(relaciones); //Obtener la lista de usuarios
+        int[][] matrizAdyacencia = gestor.crearmatrizAdyacencia(usuarios, relaciones); //instanciar al metodo donde se crea la matriz
         
-       InformacionStr.setText(mostrarmatrizAdyacencia(matrizAdyacencia, usuarios).toString());
-        
-        System.out.println("Boton presionadp");
+       DefaultTableModel modelo=  new DefaultTableModel(); 
+        for (String usuario : usuarios) { //Asignar las columnas de usuarios
+        modelo.addColumn(usuario);
+    }
+       for (int i = 0; i < matrizAdyacencia.length; i++) { //columnas con los valores de la matriz 
+        Object[] rowData = new Object[matrizAdyacencia[i].length + 1];
+        rowData[0] = usuarios.get(i); // Nombre de fila
+        for (int j = 0; j < matrizAdyacencia[i].length; j++) {
+            rowData[j + 1] = matrizAdyacencia[i][j];
+        }
+        modelo.addRow(rowData);
+    
+        }
+       InformacionMtriz.setVisible(true);
+       InformacionMtriz.setModel(modelo);
     }//GEN-LAST:event_matrizBttonActionPerformed
 
     /**
@@ -264,14 +289,14 @@ public class VisualGrafo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane InformacionStr;
+    private javax.swing.JTable InformacionMtriz;
+    private javax.swing.JButton InformacionUser;
     private javax.swing.JPanel PanelGrafo;
-    private javax.swing.JButton Vertices;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Volver;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton matrizBtton;
     // End of variables declaration//GEN-END:variables
 }

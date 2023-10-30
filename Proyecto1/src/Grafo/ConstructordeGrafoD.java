@@ -5,28 +5,27 @@
 package Grafo;
 
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
-import com.mxgraph.layout.mxCompactTreeLayout;
+
 import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
-import interfaces.VerGrafo;
+
 import interfaces.VisualGrafo;
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
-import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 import proyecto1.GestordeArchivo;
-import static proyecto1.GestordeArchivo.mostrarmatrizAdyacencia;
+
 
 /**
  *
  * @author Antonella
  */
 public class ConstructordeGrafoD {
-    private final Grafoprueba <Integer> grafo;
+    private final Grafo <Integer> grafo;
     private final mxGraph grafos;
     private final HashMap <Integer, Object> vertexMap;
     private final List<String>usuarios;
@@ -38,7 +37,7 @@ public class ConstructordeGrafoD {
     
  
     
-    public ConstructordeGrafoD (GestordeArchivo gestor, Grafoprueba vertice){ 
+    public ConstructordeGrafoD (GestordeArchivo gestor, Grafo vertice){ 
         this.Pares= vertice.getAristas();
         this.matrizAdyacencia= gestor.getMatriz();
         this.usuarios= gestor.getusuarios();
@@ -47,7 +46,7 @@ public class ConstructordeGrafoD {
         grafos=new mxGraph();
         vertexMap=new HashMap();
         usuarioMap=new HashMap();
-         grafo= new Grafoprueba<>();
+         grafo= new Grafo<>();
          this.vertices= vertice.ObtenerVertices(); 
     }
     
@@ -94,18 +93,18 @@ public class ConstructordeGrafoD {
         
     }   
          
-         System.out.println(grafo.toString()); 
          GrafoVisual(matrizAdyacencia,vertices,Pares);
     }
     
    
     public void GrafoVisual(int[][] matrizAdyacencia, List<List<Integer>> vertices,  List<List<Integer>>Pares){
         mxGraph visualgrafo= new mxGraph();
-        visualgrafo.setCellsEditable(false);
+        visualgrafo.setCellsEditable(false); //desabilitar la edicion de las celdas del grafo 
+        visualgrafo.setConnectableEdges(false);//desabilitar agregar aristas 
    
        int numVertices = matrizAdyacencia.length;
-        Object parent= visualgrafo.getDefaultParent();
-        visualgrafo.getModel().beginUpdate();
+        Object parent= visualgrafo.getDefaultParent(); //el objeto "padre" predeterminado del grafo, se utiliza como contenedor para los elementos del grafo
+        visualgrafo.getModel().beginUpdate();// actualización del modelo del grafo  permite realizar cambios en la estructura del grafo.
         try{
             for (int i=0;i<numVertices;i++){
                 String nodo= usuarioMap.get(i);
@@ -114,7 +113,7 @@ public class ConstructordeGrafoD {
                 
             }
             
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++) { //Si el valor en la matriz de adyacencia es 1, se inserta una arista entre los vértices correspondientes utilizando los objetos de vértice obtenidos del vertexMap 
             for (int j = i+1; j < numVertices; j++) {
                 if (matrizAdyacencia[i][j]==1){
                         visualgrafo.insertEdge(parent, null, "", vertexMap.get(i), vertexMap.get(j));
@@ -147,29 +146,7 @@ public class ConstructordeGrafoD {
         frame.pack();
         frame.setVisible(true);
         PanelGrafo.setVisible(true);
-        
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.getContentPane().add(graphComponent);
-//        frame.pack();
-//        frame.setVisible(true);
-        
+
     }
-    
-    
-        
-//    public void visualizarGrafo() {
-//        JFrame frame = new JFrame();
-//        frame.setTitle("Grafo");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        mxGraphComponent graphComponent = new mxGraphComponent(grafos);
-//        mxGraphLayout layout = new mxHierarchicalLayout(grafos);
-//        layout.execute(graphComponent.getGraph().getDefaultParent());
-//        frame.getContentPane().add(graphComponent);
-//        frame.pack();
-//        frame.setVisible(true);
-//    }
-    
-      
         }
     

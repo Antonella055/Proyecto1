@@ -68,7 +68,8 @@ public class GestionUsers{
     }
     public static JFileChooser obtenerArchivo(){
         JFileChooser chooser = new JFileChooser();
-chooser.setCurrentDirectory(new java.io.File("."));
+        
+chooser.setCurrentDirectory(new File("C:\\Users\\Antonella\\OneDrive\\Escritorio\\Proyecto Github\\Github\\Proyecto1\\Usuarios txt")); 
 chooser.setDialogTitle("Seleccione un archivo txt");
 chooser.addChoosableFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
